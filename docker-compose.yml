@@ -1,0 +1,18 @@
+version: '2'
+services:
+  mongodb:
+    container_name: mdb
+    image: mongo:3.2
+    command: mongod --smallfiles
+  services:
+    container_name: vtube-service
+    build: build/libs
+    image: vtube-services
+    depends_on: # ensures that the data-store is started first
+      - mdb
+    ports:
+      - "8080:8080"
+    links:
+      - mdb
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mdb/vtube
