@@ -5,7 +5,7 @@ services:
     image: mongo:3.2
     command: mongod --smallfiles
   services:
-    container_name: vtube-service
+    container_name: darth.json/vtube-svc
     build: build/libs
     image: vtube-services
     depends_on: # ensures that the data-store is started first
