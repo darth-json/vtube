@@ -5,14 +5,13 @@ services:
     image: mongo:3.2
     command: mongod --smallfiles
   services:
-    container_name: darth.json/vtube-svc
-    build: build/libs
-    image: vtube-services
+    container_name: vtube-svc
+    image: darth.json/vtube-services
     depends_on: # ensures that the data-store is started first
-      - mdb
+      - mongodb
     ports:
       - "8080:8080"
     links:
-      - mdb
+      - mongodb
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mdb/vtube
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb/vtube
